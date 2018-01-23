@@ -21,12 +21,12 @@ RUN wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz -O - | tar -xz
 
 RUN rm -rf Python-3.6.3/
 
-COPY ./ /root/wallet/
+COPY ./ /root/btsmonitor/
 COPY ./docker/locale.conf /etc/locale.conf
 RUN source /etc/locale.conf
 
 EXPOSE 17128
 
-WORKDIR /root/wallet/
+WORKDIR /root/btsmonitor/
 
-ENTRYPOINT python3 wallet.py
+ENTRYPOINT python3 main.py

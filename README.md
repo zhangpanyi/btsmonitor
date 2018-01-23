@@ -5,8 +5,8 @@
 
 ## 获取代码
 ```
-git clone https://zhangpanyi@bitbucket.org/zhangpanyi/wallet.git
-cd walletmonitor
+git clone https://github.com/zhangpanyi/btsmonitor.git
+cd btsmonitor
 ```
 
 ## CentOS 7

@@ -10,8 +10,9 @@ RUN yum install openssl-devel -y
 RUN wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz -O - | tar -xz \
     && cd Python-3.6.3 \
     && ./configure --enable-optimizations --enable-loadable-sqlite-extensions \
-    && make && make install \
-    && pip3 install pyyaml==3.12 \
+    && make && make install
+
+RUN pip3 install pyyaml==3.12 \
     && pip3 install aiomysql==0.0.12 \
     && pip3 install sqlalchemy==1.2.3 \
     && pip3 install pycrypto==2.6.1 \

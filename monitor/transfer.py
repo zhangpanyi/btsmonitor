@@ -3,8 +3,8 @@
 import asyncio
 import logging
 from . import statistics
-from graphenebase import memo as BtsMemo
-from graphenebase import PublicKey, PrivateKey
+from bitsharesbase import memo as BtsMemo
+from bitsharesbase.account import PublicKey, PrivateKey
 
 def id_to_int(id):
     return int(id.split('.')[-1])

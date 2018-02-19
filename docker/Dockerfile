@@ -11,13 +11,13 @@ RUN wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz -O - | tar -xz
     && cd Python-3.6.3 \
     && ./configure --enable-optimizations --enable-loadable-sqlite-extensions \
     && make && make install \
-    && pip3 install pyyaml \
-    && pip3 install aiomysql \
-    && pip3 install sqlalchemy \
-    && pip3 install pycrypto \
-    && pip3 install bitshares \
-    && pip3 install grpcio \
-    && pip3 install grpcio-tools
+    && pip3 install pyyaml=3.12 \
+    && pip3 install aiomysql=0.0.12 \
+    && pip3 install sqlalchemy=1.2.3 \
+    && pip3 install pycrypto=2.6.1 \
+    && pip3 install bitshares=0.1.11 \
+    && pip3 install grpcio=1.9.1 \
+    && pip3 install grpcio-tools=1.9.1
 
 RUN rm -rf Python-3.6.3/
 

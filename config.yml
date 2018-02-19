@@ -25,4 +25,4 @@ mysql_logger:
   port: 3306
   user: "root"
   passwd: ""
-  database: "casino_logs"
+  database: "casinologs"

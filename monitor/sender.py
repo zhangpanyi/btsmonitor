@@ -60,7 +60,6 @@ class Sender(object):
     async def get_transfer_fee(self):
         """ 获取转账费用
         """
-        from bitsharesbase.operations import operations
         obj = (await self.node_api.get_objects(['2.0.0']))[0]
         fees = obj['parameters']['current_fees']['parameters']
         scale = float(obj['parameters']['current_fees']['scale'])

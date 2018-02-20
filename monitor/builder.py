@@ -26,9 +26,9 @@ class Builder(dict):
     def clear(self):
         """ 清理
         """
-        self.ops = []
-        self.wifs = []
-        self.available_signers = []
+        self.ops.clear()
+        self.wifs.clear()
+        self.available_signers.clear()
     
     def append_ops(self, ops):
         """ 添加操作

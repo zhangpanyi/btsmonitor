@@ -16,7 +16,7 @@ class AsyncWs(object):
     database_api = 0
 
     def __init__(self, url, num_workers=10):
-        self.url= url
+        self.url = url
         self.__result = {}
         self.__callbacks = {}
         self.__request_id = 0

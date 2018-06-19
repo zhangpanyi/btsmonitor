@@ -5,7 +5,7 @@ import logging
 from .pusher import Pusher
 from .asyncrpc import AsyncRPC
 from .sysconfig import SysConfig
-#from bitsharesbase.account import PublicKey, PrivateKey
+from bitsharesbase.account import PublicKey, PrivateKey
 
 def get_operation_id(id):
     ''' 获取操作id

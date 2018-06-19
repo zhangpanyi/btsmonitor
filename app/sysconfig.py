@@ -28,4 +28,18 @@ class SysConfig(object):
         # 工人数量
         self.workernum  = data['workernum']
         # 回调地址
-        self.webhook    = data[ 'webhook']
+        self.webhook    = data['webhook']
+
+    def get_last_op_number(self):
+        ''' 获取最后操作数量
+        '''
+        data = yaml.load(open('lastop.yml', 'rb'))
+        return data['op_number']
+
+    def update_last_op_number(self, op_number):
+        ''' 更新最后操作数量
+        '''
+        data = {'op_number': op_number}
+        handle = open('lastop.yml', 'w')
+        yaml.dump(data, handle)
+        handle.close()

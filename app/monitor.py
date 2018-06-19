@@ -4,6 +4,7 @@ import asyncio
 import logging
 from .pusher import Pusher
 from .asyncrpc import AsyncRPC
+from .sysconfig import SysConfig
 #from bitsharesbase.account import PublicKey, PrivateKey
 
 def get_operation_id(id):
@@ -144,6 +145,7 @@ class Monitor(object):
                         self._pusher.async_call(trx)
                     index += 1
                     op_number += 1
+                    SysConfig().update_last_op_number(op_number)
                 except Exception as e:
                     logging.warn('Failed to get process operation#%s, %s', operation['id'], str(e))
                     continue
@@ -152,8 +154,7 @@ class Monitor(object):
     async def _listen_for_activity(self):
         ''' 监听账户活动
         '''
-        op_number = 0
-
+        op_number = SysConfig().get_last_op_number()
         while True:
             # 创建客户端
             client = AsyncRPC(self._url, self._loop)

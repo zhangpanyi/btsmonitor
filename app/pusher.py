@@ -13,14 +13,8 @@ class Pusher(object):
         self._message_queue = deque()
         if self._loop is None:
             self._loop = asyncio.get_event_loop()
-
-    def get_futures(self):
-        ''' 任务列表
-        '''
-        futures = []
         for _ in range(SysConfig().workernum):
-            futures.append(asyncio.ensure_future(self._do_work()))
-        return futures
+            asyncio.ensure_future(self._do_work())
 
     def async_call(self, trx):
         ''' 异步调用

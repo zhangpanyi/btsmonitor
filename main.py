@@ -1,30 +1,29 @@
 # -*- coding:utf-8 -*-
 
+import signal
 import asyncio
 import logging
 from app import logger
 from app.monitor import Monitor
 from app.sysconfig import SysConfig
 
-async def event_loop(futures):
-    ''' 事件循环
-    '''
-    try:
-        await asyncio.wait(futures)
-    except Exception as e:
-        logging.critical('Event loop error, %s', str(e))
+def handler(signum, frame):
+    asyncio.get_event_loop().stop()
+    logging.info('Bitshares monitor server stopped.')
 
 def main():
     # 初始配置
     sysconfig = SysConfig()
 
     # 运行监控
-    monitor = Monitor(sysconfig.wss, sysconfig.account)
-    
+    Monitor(sysconfig.wss, sysconfig.account)
+    signal.signal(signal.SIGINT, handler)
+    signal.signal(signal.SIGTERM, handler)
+
     # 进入事件循环
     try:
-        futures = monitor.get_futures()
-        asyncio.get_event_loop().run_until_complete(event_loop(futures))
+        logging.info('Bitshares monitor server start.')
+        asyncio.get_event_loop().run_forever()
     except Exception as e:
         logging.critical('Event loop error, %s', str(e))
 

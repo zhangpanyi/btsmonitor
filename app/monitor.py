@@ -36,13 +36,8 @@ class Monitor(object):
         self._pusher = Pusher(self._loop)
         if self._loop is None:
             self._loop = asyncio.get_event_loop()
-
-    def get_futures(self):
-        ''' 任务列表
-        '''
-        future = asyncio.ensure_future(
+        asyncio.ensure_future(
             self._listen_for_activity(), loop=self._loop)
-        return [future] + self._pusher.get_futures()
 
     async def _get_history_operation(self, client, op_number, limit):
         ''' 获取历史操作

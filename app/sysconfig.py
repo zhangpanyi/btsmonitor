@@ -10,6 +10,7 @@ CONFIG_FILE_PATH = 'server.yml'
 class SysConfig(object):
     ''' 系统配置
     '''
+    
     def __init__(self):
         data = yaml.load(open(CONFIG_FILE_PATH, 'rb'))
         # 接入点

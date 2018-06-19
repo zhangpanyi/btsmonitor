@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import yaml
 from .singleton import Singleton
 
 CONFIG_FILE_PATH = 'server.yml'
@@ -10,25 +11,20 @@ class SysConfig(object):
     ''' 系统配置
     '''
     def __init__(self):
+        data = yaml.load(open(CONFIG_FILE_PATH, 'rb'))
         # 接入点
-        self.wss = 'wss://ws.gdex.top'
+        self.wss        = data['wss']
         # 账户名
-        self.account = 'bts'
+        self.account    = data['account']
         # 绑定地址
-        self.rpc_host = '127.0.0.1'
+        self.rpc_host   = data['rpc_host']
         # 绑定端口
-        self.rpc_port = 18080
+        self.rpc_port   = data['rpc_port']
         # 用户名
-        self.username = None
+        self.username   = data['username']
         # 密码
-        self.password = None
+        self.password   = data['password']
         # 工人数量
-        self.workernum = 10
+        self.workernum  = data['workernum']
         # 回调地址
-        self.webhook = None
-        self._init_from_file()
-
-    def _init_from_file(self):
-        ''' 从配置文件初始化
-        '''
-        pass
+        self.webhook    = data[ 'webhook']

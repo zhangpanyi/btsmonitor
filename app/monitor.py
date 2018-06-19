@@ -2,6 +2,7 @@
 
 import asyncio
 import logging
+from .pusher import Pusher
 from .asyncrpc import AsyncRPC
 #from bitsharesbase.account import PublicKey, PrivateKey
 
@@ -31,6 +32,7 @@ class Monitor(object):
         self._account = None
         self._account_name = account
         self._last_relative_position = 0
+        self._pusher = Pusher(self._loop)
         if self._loop is None:
             self._loop = asyncio.get_event_loop()
 
@@ -39,7 +41,7 @@ class Monitor(object):
         '''
         future = asyncio.ensure_future(
             self._listen_for_activity(), loop=self._loop)
-        return [future]
+        return [future] + self._pusher.get_futures()
 
     async def _get_history_operation(self, client, op_number, limit):
         ''' 获取历史操作
@@ -139,7 +141,7 @@ class Monitor(object):
                 try:
                     trx = await self._process_transfer_operations(client, operation)
                     if not trx is None:
-                        pass
+                        self._pusher.async_call(trx)
                     index += 1
                     op_number += 1
                 except Exception as e:

@@ -14,7 +14,7 @@ class SysConfig(object):
     def __init__(self):
         data = yaml.load(open(CONFIG_FILE_PATH, 'rb'))
         # 接入点
-        self.wss        = data['wss']
+        self.access     = data['access']
         # 账户名
         self.account    = data['account']
         # 绑定地址

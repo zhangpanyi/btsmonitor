@@ -7,6 +7,8 @@ from collections import deque
 from .sysconfig import SysConfig
 
 class Pusher(object):
+    ''' 通知推送器
+    '''
     
     def __init__(self, loop=None):
         self._loop = loop

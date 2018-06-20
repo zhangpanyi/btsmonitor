@@ -16,7 +16,7 @@ def main():
     sysconfig = SysConfig()
 
     # 运行监控
-    Monitor(sysconfig.wss, sysconfig.account)
+    Monitor(sysconfig.access, sysconfig.account)
     signal.signal(signal.SIGINT, handler)
     signal.signal(signal.SIGTERM, handler)
 

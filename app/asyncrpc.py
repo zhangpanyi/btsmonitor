@@ -3,6 +3,7 @@
 import json
 import asyncio
 import websockets
+from bitsharesbase.chains import known_chains
 
 class RPCError(Exception):
     pass
@@ -12,6 +13,7 @@ class AsyncRPC(object):
         :param url 节点地址
     '''
     api_id = {}
+    chain_params = None
 
     def __init__(self, url, loop=None):
         self.url= url
@@ -39,6 +41,16 @@ class AsyncRPC(object):
         self.api_id['history'] = await self.history(api_id=1)
         self.api_id['database'] = await self.database(api_id=1)
         self.api_id['network_broadcast'] = await self.network_broadcast(api_id=1)
+
+        props = await self.get_chain_properties(api_id=0)
+        chain_id = props["chain_id"]
+        for k, v in known_chains.items():
+            if v["chain_id"] == chain_id:
+                self.chain_params = v
+                break
+        if self.chain_params == None:
+            raise("Connecting to unknown network!")
+
         self._almost_ready.set_result(None)
 
     def _on_messsage(self, payload):

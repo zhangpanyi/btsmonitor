@@ -99,7 +99,7 @@ class Monitor(object):
             memo = op['memo']
             trx['nonce'] = memo['nonce']
             try:
-                privkey = PrivateKey(self.wifkey)
+                privkey = PrivateKey(SysConfig().memo_key)
                 prefix = client.chain_params['prefix']
                 if trx['to_id'] == self._account['id']:
                     pubkey = PublicKey(memo['from'], prefix=prefix)

@@ -2,7 +2,7 @@
 
 import asyncio
 from aiohttp import web
-from .asyncrpc import AsyncRPC
+from .httprpc import HttpRPC
 from .sysconfig import SysConfig
 from jsonrpcserver.aio import methods
 
@@ -47,10 +47,8 @@ class RpcServer(object):
     async def _handle(self, request):
         ''' 分发请求
         '''
-        client = AsyncRPC(SysConfig().access, self._loop)
-        await client.wait_for_ready()
-
         request = await request.text()
+        client = HttpRPC(SysConfig().access, self._loop)
         response = await methods.dispatch(request, context={'client': client})
         if response.is_notification:
             return web.Response()

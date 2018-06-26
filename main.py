@@ -5,6 +5,7 @@ import asyncio
 import logging
 from app import logger
 from app.monitor import Monitor
+from app.rpcserver import RpcServer
 from app.sysconfig import SysConfig
 
 def handler(signum, frame):
@@ -19,6 +20,10 @@ def main():
     Monitor(sysconfig.access, sysconfig.account)
     signal.signal(signal.SIGINT, handler)
     signal.signal(signal.SIGTERM, handler)
+
+    # 启动RPC服务
+    server = RpcServer()
+    server.listen(sysconfig.rpc_host, sysconfig.rpc_port)
 
     # 进入事件循环
     try:

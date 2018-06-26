@@ -5,6 +5,7 @@ import logging
 from .pusher import Pusher
 from .asyncrpc import AsyncRPC
 from .sysconfig import SysConfig
+from bitsharesbase import memo as BtsMemo
 from bitsharesbase.account import PublicKey, PrivateKey
 
 def get_operation_id(id):
@@ -22,7 +23,6 @@ class Monitor(object):
         :param account 比特股账户名
     '''
     asset_info = {}
-    wifkey = '5JZDBfKmhN9xULvjkACGjxdadhFgDHdLxLVYEtMC6LepiRp6B8X'
 
     TRANSFER_OPERATION = 0
     OPERATION_HISTORY_ID_TYPE = '1.11.0'

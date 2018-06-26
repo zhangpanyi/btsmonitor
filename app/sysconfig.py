@@ -17,6 +17,10 @@ class SysConfig(object):
         self.access     = data['access']
         # 账户名
         self.account    = data['account']
+        # 活动key
+        self.active_key = data['active_key']
+        # 备注key
+        self.memo_key   = data['memo_key']
         # 绑定地址
         self.rpc_host   = data['rpc_host']
         # 绑定端口

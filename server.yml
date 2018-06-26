@@ -7,7 +7,7 @@ active_key: 5Kj1QsVNgTh5a7ZdXhL6sAjo8RHGzxcwjaW2xXcxREXgVsmpZGi
 # 备注权限
 memo_key: 5Kj1QsVNgTh5a7ZdXhL6sAjo8RHGzxcwjaW2xXcxREXgVsmpZGi
 # 绑定地址
-rpc_host: 127.0.0.1
+rpc_host: 0.0.0.0
 # 绑定端口
 rpc_port: 18080
 # 用户名

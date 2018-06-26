@@ -48,8 +48,8 @@ class Monitor(object):
         return operations
 
     async def _get_asset_info(self, client, asset_id):
-        """ 获取资产信息
-        """
+        ''' 获取资产信息
+        '''
         if asset_id not in self.asset_info:
             asset = (await client.get_objects([asset_id]))[0]
             self.asset_info[asset_id] = asset

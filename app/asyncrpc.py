@@ -16,7 +16,7 @@ class AsyncRPC(object):
     chain_params = None
 
     def __init__(self, url, loop=None):
-        self.url= url
+        self.url = url
         self._loop = loop
         self._result = {}
         self._request_id = 0
@@ -43,13 +43,13 @@ class AsyncRPC(object):
         self.api_id['network_broadcast'] = await self.network_broadcast(api_id=1)
 
         props = await self.get_chain_properties(api_id=0)
-        chain_id = props["chain_id"]
+        chain_id = props['chain_id']
         for k, v in known_chains.items():
-            if v["chain_id"] == chain_id:
+            if v['chain_id'] == chain_id:
                 self.chain_params = v
                 break
         if self.chain_params == None:
-            raise("Connecting to unknown network!")
+            raise('Connecting to unknown network!')
 
         self._almost_ready.set_result(None)
 

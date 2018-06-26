@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 
 import random
-from .builder import Builder
 from .sysconfig import SysConfig
+from .builder import Builder, MissingKeyError
 from bitsharesbase import operations
 from bitsharesbase import memo as BtsMemo
 from bitsharesbase.account import PrivateKey, PublicKey
@@ -11,6 +11,7 @@ class Transfer(object):
     ''' 转账模块
         :param client RPC客户端
     '''
+    asset_info = {}
 
     def __init__(self, client, account):
         self.client = client
@@ -53,6 +54,15 @@ class Transfer(object):
         await txbuffer.sign(asset_id, expiration=600)
         res = await txbuffer.broadcast()
         return res.json()
+
+    async def get_asset_info(self, asset_id):
+        ''' 获取资产信息
+        '''
+        if asset_id not in self.asset_info:
+            asset = (await self.client.get_objects([asset_id]))[0]
+            self.asset_info[asset_id] = asset
+            self.asset_info[asset['symbol']] = asset
+        return self.asset_info[asset_id]
 
     async def _encrypt_memo(self, to, memo):
         ''' 加密备注信息

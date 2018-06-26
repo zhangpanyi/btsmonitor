@@ -5,21 +5,20 @@ import signal
 import asyncio
 import logging
 from app import logger
-#from app.monitor import Monitor
+from app.monitor import Monitor
 from app.rpcserver import RpcServer
 from app.sysconfig import SysConfig
 
 def handler(signum, frame):
     asyncio.get_event_loop().stop()
     logging.info('Bitshares monitor server stopped.')
-    sys.exit(0)
 
 def main():
     # 初始配置
     sysconfig = SysConfig()
 
     # 运行监控
-    #Monitor(sysconfig.access, sysconfig.account)
+    Monitor(sysconfig.access, sysconfig.account)
     signal.signal(signal.SIGINT, handler)
     signal.signal(signal.SIGTERM, handler)
 

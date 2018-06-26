@@ -47,7 +47,7 @@ class RpcServer(object):
     async def _handle(self, request):
         ''' 分发请求
         '''
-        client = AsyncRPC(SysConfig.access, self._loop)
+        client = AsyncRPC(SysConfig().access, self._loop)
         await client.wait_for_ready()
 
         request = await request.text()

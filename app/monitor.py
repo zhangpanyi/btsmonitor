@@ -27,10 +27,10 @@ class Monitor(object):
     TRANSFER_OPERATION = 0
     OPERATION_HISTORY_ID_TYPE = '1.11.0'
 
-    def __init__(self, url, account, loop=None):
-        self._url = url
+    def __init__(self, access, account, loop=None):
         self._loop = loop
         self._account = None
+        self._access = access
         self._account_name = account
         self._last_relative_position = 0
         self._pusher = Pusher(self._loop)
@@ -152,7 +152,7 @@ class Monitor(object):
         op_number = SysConfig().get_last_op_number()
         while True:
             # 创建客户端
-            client = AsyncRPC(self._url, self._loop)
+            client = AsyncRPC(self._access, self._loop)
             await client.wait_for_ready()
 
             # 获取账户信息

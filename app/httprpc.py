@@ -10,10 +10,9 @@ class HttpRPC(object):
     '''
     chain_params = None
 
-    def __init__(self, url, loop=None):
-        self.url = url
+    def __init__(self, access, loop=None):
+        self._url = 'https://' + access
         self._loop = loop
-        self._request_id = 0
 
     async def load_chain_params(self):
         ''' 加载网络参数
@@ -30,16 +29,12 @@ class HttpRPC(object):
     async def _rpc(self, method, params):
         ''' 远程过程调用
         '''
-        # 生成请求id
-        self._request_id += 1
-        request_id = self._request_id
-
         # 生成请求内容
-        request = {'id': request_id, 'method': method, 'params': params}
+        request = {'id': 1, 'method': method, 'params': params}
 
         # 异步执行请求
         async with aiohttp.ClientSession() as session:
-            async with session.post(self.url, json=request) as resp:
+            async with session.post(self._url, json=request) as resp:
                 # 格式化返回结果
                 ret = json.loads(await resp.text())
                 if 'error' in ret:

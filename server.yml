@@ -1,5 +1,5 @@
 # 接入点
-access: wss://node.testnet.bitshares.eu
+access: node.testnet.bitshares.eu
 # 账户名
 account: btsmonitor-test
 # 活跃权限

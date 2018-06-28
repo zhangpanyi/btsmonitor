@@ -15,8 +15,8 @@ class AsyncRPC(object):
     api_id = {}
     chain_params = None
 
-    def __init__(self, url, loop=None):
-        self.url = url
+    def __init__(self, access, loop=None):
+        self.url = 'wss://' + access
         self._loop = loop
         self._result = {}
         self._request_id = 0

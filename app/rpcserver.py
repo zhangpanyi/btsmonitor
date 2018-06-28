@@ -36,7 +36,7 @@ async def transfer(to, symbol_or_id, amount, memo, context):
     return await transfer.send_to(to, asset, amount, memo)
 
 @methods.add
-async def get_transfer_fee(symbols_or_ids : list, context):
+async def get_transfer_fees(symbols_or_ids : list, context):
     ''' 获取转账手续费
     '''
     assets = []
@@ -44,7 +44,7 @@ async def get_transfer_fee(symbols_or_ids : list, context):
     server = context['server']
     for asset in symbols_or_ids:
         assets.append(await server.get_asset_info(client, asset))
-    return await server.calcul_transfer_fee(client, assets)
+    return await server.calcul_transfer_fees(client, assets)
 
 class RpcServer(object):
     ''' json-rpc服务
@@ -94,7 +94,7 @@ class RpcServer(object):
                 return (f[1], scale)
         raise RuntimeError('Invalid result!')
 
-    async def calcul_transfer_fee(self, client, assets):
+    async def calcul_transfer_fees(self, client, assets):
         ''' 计算转账费用
         '''
         fee_list = []

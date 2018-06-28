@@ -8,23 +8,10 @@ from bitsharesbase.chains import known_chains
 class HttpRPC(object):
     ''' 短链接RPC客户端
     '''
-    chain_params = None
 
     def __init__(self, access, loop=None):
         self._url = 'https://' + access
         self._loop = loop
-
-    async def load_chain_params(self):
-        ''' 加载网络参数
-        '''
-        props = await self.get_chain_properties()
-        chain_id = props['chain_id']
-        for k, v in known_chains.items():
-            if v['chain_id'] == chain_id:
-                self.chain_params = v
-                break
-        if self.chain_params == None:
-            raise('Connecting to unknown network!')
 
     async def _rpc(self, method, params):
         ''' 远程过程调用

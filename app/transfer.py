@@ -11,13 +11,12 @@ class Transfer(object):
     ''' 转账模块
         :param client RPC客户端
     '''
-    asset_info = {}
 
     def __init__(self, client, account):
         self.client = client
         self.account = account
 
-    async def send_to(self, to, asset_id, amount, memo=''):
+    async def send_to(self, to, asset, amount, memo=''):
         ''' 发送资产
         '''
         # 加密备注
@@ -30,7 +29,6 @@ class Transfer(object):
             to_id = to_account['id']
 
         # 计算转账数量
-        asset = await self.get_asset_info(asset_id)
         amount = amount * 10 ** asset['precision']
 
         # 生成转账操作
@@ -40,29 +38,20 @@ class Transfer(object):
             'from': self.account['id'],
             'amount': {
                 'amount': amount,
-                'asset_id': asset_id
+                'asset_id': asset['id']
             },
             'prefix': prefix,
             'memo': memo_data,
-            'fee': {'amount': 0, 'asset_id': asset_id}
+            'fee': {'amount': 0, 'asset_id': asset['id']}
         })
 
         # 执行转账操作
         txbuffer = Builder(self.client)
         txbuffer.append_ops(op)
         await txbuffer.append_signer(self.account, SysConfig().active_key, prefix, 'active')
-        await txbuffer.sign(asset_id, expiration=600)
+        await txbuffer.sign(asset['id'], expiration=600)
         res = await txbuffer.broadcast()
         return res.json()
-
-    async def get_asset_info(self, asset_id):
-        ''' 获取资产信息
-        '''
-        if asset_id not in self.asset_info:
-            asset = (await self.client.get_objects([asset_id]))[0]
-            self.asset_info[asset_id] = asset
-            self.asset_info[asset['symbol']] = asset
-        return self.asset_info[asset_id]
 
     async def _encrypt_memo(self, to, memo):
         ''' 加密备注信息

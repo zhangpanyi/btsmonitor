@@ -8,6 +8,12 @@ from .sysconfig import SysConfig
 from jsonrpcserver.aio import methods
 
 @methods.add
+async def account(context):
+    ''' 账户信息
+    '''
+    return SysConfig().account
+
+@methods.add
 async def get_balances(context):
     ''' 获取余额
     '''

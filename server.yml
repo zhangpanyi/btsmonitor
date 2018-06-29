@@ -10,10 +10,6 @@ memo_key: 5Kj1QsVNgTh5a7ZdXhL6sAjo8RHGzxcwjaW2xXcxREXgVsmpZGi
 rpc_host: 0.0.0.0
 # 绑定端口
 rpc_port: 18080
-# 用户名
-username: username
-# 密码
-password: password
 # 工人数量
 workernum: 10
 # 回调地址

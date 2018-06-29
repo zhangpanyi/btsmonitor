@@ -25,10 +25,6 @@ class SysConfig(object):
         self.rpc_host   = data['rpc_host']
         # 绑定端口
         self.rpc_port   = data['rpc_port']
-        # 用户名
-        self.username   = data['username']
-        # 密码
-        self.password   = data['password']
         # 工人数量
         self.workernum  = data['workernum']
         # 回调地址

@@ -25,7 +25,7 @@ pip3 install jsonrpcserver==3.5.6
 # Docker容器
 ```
 sudo docker build -t="btsmonitor" -f docker/Dockerfile .
-sudo docker run -name btsmonitor -d -p 18080:18080 btsmonitor
+sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 ```
 
 # JSON-RPC 接口

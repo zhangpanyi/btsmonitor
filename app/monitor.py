@@ -137,6 +137,7 @@ class Monitor(object):
                 try:
                     trx = await self._process_transfer_operations(client, operation)
                     if not trx is None:
+                        logging.info('New transfer operation: %s', trx)
                         self._pusher.async_call(trx)
                     index += 1
                     op_number += 1

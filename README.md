@@ -78,11 +78,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 {
     "jsonrpc": "2.0",
     "result": [
-        {
-            "id": "1.3.0",
-            "symbol": "TEST",
-            "amount": 99992.993
-        }
+        0
     ],
     "id": 1
 }

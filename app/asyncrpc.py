@@ -32,7 +32,7 @@ class AsyncRPC(object):
     async def wait_for_ready(self):
         ''' 等待就绪
         '''
-        await asyncio.wait_for(self._almost_ready, None)
+        return await asyncio.wait_for(self._almost_ready, None)
 
     async def _on_open(self):
         ''' 连接成功
@@ -51,7 +51,7 @@ class AsyncRPC(object):
         if self.chain_params == None:
             raise('Connecting to unknown network!')
 
-        self._almost_ready.set_result(None)
+        self._almost_ready.set_result(True)
 
     def _on_messsage(self, payload):
         ''' 收到消息
@@ -73,11 +73,14 @@ class AsyncRPC(object):
     async def _open_connection(self):
         ''' 打开连接
         '''
-        async with websockets.connect(self.url, max_size=2**20*8, max_queue=2**5*2) as websocket:
-            self._websocket = websocket
-            task1 = asyncio.ensure_future(self._on_open(), loop=self._loop)
-            task2 = asyncio.ensure_future(self._recv_message(), loop=self._loop)
-            await asyncio.wait([task1, task2])
+        try:
+            async with websockets.connect(self.url, max_size=2**20*8, max_queue=2**5*2) as websocket:
+                self._websocket = websocket
+                task1 = asyncio.ensure_future(self._on_open(), loop=self._loop)
+                task2 = asyncio.ensure_future(self._recv_message(), loop=self._loop)
+                await asyncio.wait([task1, task2])
+        except Exception:
+            self._almost_ready.set_result(False)
 
     async def _rpc(self, params):
         ''' 远程过程调用

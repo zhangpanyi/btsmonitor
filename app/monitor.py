@@ -154,7 +154,8 @@ class Monitor(object):
         while True:
             # 创建客户端
             client = AsyncRPC(self._access, self._loop)
-            await client.wait_for_ready()
+            if not await client.wait_for_ready():
+                continue
 
             # 获取账户信息
             if self._account is None:

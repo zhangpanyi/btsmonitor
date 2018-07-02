@@ -120,7 +120,8 @@ class RpcServer(object):
         '''
         request = await request.text()
         client = AsyncRPC(SysConfig().access, self._loop)
-        await client.wait_for_ready()
+        if not await client.wait_for_ready():
+            raise RuntimeError('Websocket connection failed')
         response = await methods.dispatch(request, context={'server': self, 'client': client})
         await client.close()
         if response.is_notification:

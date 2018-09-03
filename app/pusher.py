@@ -35,4 +35,4 @@ class Pusher(object):
                 async with aiohttp.ClientSession() as session:
                     await session.post(SysConfig().webhook, json=trx)
             except Exception as e:
-                logging.info('Failed to post notify: %s, %s', trx, str(e))
+                logging.warn('Failed to post notify: %s, %s', trx, str(e))

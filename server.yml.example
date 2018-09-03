@@ -20,4 +20,4 @@ rpc_port: 18080
 workernum: 10
 
 # 回调地址
-webhook: 'http://127.0.0.1/bitshares'
+webhook: 'http://127.0.0.1/deposit'

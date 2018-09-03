@@ -70,7 +70,7 @@ class Monitor(object):
         
         # 获取区块信息
         trx['heigth'] = operation['block_num']  
-        block_info = await client.get_block(trx['block_num'])
+        block_info = await client.get_block(trx['heigth'])
         trx['timestamp'] = block_info['timestamp']
         
         # 获取转账金额

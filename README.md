@@ -52,7 +52,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
         {
             "id": "1.3.0",
             "symbol": "TEST",
-            "amount": 99992.993
+            "amount": "99992.993"
         }
     ],
     "id": 1
@@ -78,7 +78,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 {
     "jsonrpc": "2.0",
     "result": [
-        0
+        "0"
     ],
     "id": 1
 }
@@ -96,7 +96,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 	"jsonrpc": "2.0",
 	"id": 1,
 	"method": "transfer",
-	"params": ["bts", "TEST", 1, "hello"]
+	"params": ["bts", "TEST", "1", "hello"]
 }
 
 // 返回结果

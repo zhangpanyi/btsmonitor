@@ -20,7 +20,7 @@ pip3 install jsonrpcserver==3.5.6
 ```
 
 # 配置文件
-[server.yml](server.yml) 文件是 btsmonitor 服务的配置文件，用户可以自行配置比特股接入点、账户、JSON-RPC服务等。
+[server.yml.example](server.yml.example) 文件是 btsmonitor 服务的配置文件模板，需要执行命令 `python init_config.py` 生成配置文件。用户可以自行配置比特股接入点、账户、JSON-RPC服务等。
 
 # Docker容器
 ```

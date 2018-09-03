@@ -66,10 +66,10 @@ class Monitor(object):
         # 操作基本信息
         trx = {}
         op = operation['op'][1]
-        trx['trx_id'] = operation['id']
+        trx['txid'] = operation['id']
         
         # 获取区块信息
-        trx['block_num'] = operation['block_num']  
+        trx['heigth'] = operation['block_num']  
         block_info = await client.get_block(trx['block_num'])
         trx['timestamp'] = block_info['timestamp']
         

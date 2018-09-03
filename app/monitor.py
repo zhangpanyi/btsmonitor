@@ -66,27 +66,27 @@ class Monitor(object):
         # 操作基本信息
         trx = {}
         op = operation['op'][1]
-        trx['trx_id'] = operation['id']
+        trx['txid'] = operation['id']
         
         # 获取区块信息
-        trx['block_num'] = operation['block_num']  
-        block_info = await client.get_block(trx['block_num'])
+        trx['heigth'] = operation['block_num']  
+        block_info = await client.get_block(trx['heigth'])
         trx['timestamp'] = block_info['timestamp']
         
         # 获取转账金额
         asset = await self._get_asset_info(client, op['amount']['asset_id'])
         trx['asset'] = asset['symbol']
         trx['asset_id'] = op['amount']['asset_id']
-        trx['amount'] = float(op['amount']['amount'])/float(
-            10**int(asset['precision']))
+        trx['amount'] = str(float(op['amount']['amount'])/float(
+            10**int(asset['precision'])))
         
         # 获取转账手续费
         trx['fee'] = {}
         fee = await self._get_asset_info(client, op['fee']['asset_id'])
         trx['fee']['asset'] = fee['symbol']
         trx['fee']['asset_id'] = op['fee']['asset_id']
-        trx['fee']['amount'] = float(op['fee']['amount'])/float(
-            10**int(fee['precision']))
+        trx['fee']['amount'] = str(float(op['fee']['amount'])/float(
+            10**int(fee['precision'])))
        
         # 获取涉案账户
         trx['to_id'] = op['to']

@@ -1,16 +1,23 @@
 # 接入点
 access: node.testnet.bitshares.eu
+
 # 账户名
 account: btsmonitor-test
+
 # 活跃权限
 active_key: 5Kj1QsVNgTh5a7ZdXhL6sAjo8RHGzxcwjaW2xXcxREXgVsmpZGi
+
 # 备注权限
 memo_key: 5Kj1QsVNgTh5a7ZdXhL6sAjo8RHGzxcwjaW2xXcxREXgVsmpZGi
+
 # 绑定地址
 rpc_host: 0.0.0.0
+
 # 绑定端口
 rpc_port: 18080
+
 # 工人数量
 workernum: 10
+
 # 回调地址
-webhook: 'http://127.0.0.1/bitshares'
+webhook: 'http://127.0.0.1/deposit'

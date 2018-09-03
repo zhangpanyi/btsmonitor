@@ -20,7 +20,7 @@ pip3 install jsonrpcserver==3.5.6
 ```
 
 # 配置文件
-[server.yml](server.yml) 文件是 btsmonitor 服务的配置文件，用户可以自行配置比特股接入点、账户、JSON-RPC服务等。
+[server.yml.example](server.yml.example) 文件是 btsmonitor 服务的配置文件模板，需要执行命令 `python init_config.py` 生成配置文件。用户可以自行配置比特股接入点、账户、JSON-RPC服务等。
 
 # Docker容器
 ```
@@ -52,7 +52,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
         {
             "id": "1.3.0",
             "symbol": "TEST",
-            "amount": 99992.993
+            "amount": "99992.993"
         }
     ],
     "id": 1
@@ -78,7 +78,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 {
     "jsonrpc": "2.0",
     "result": [
-        0
+        "0"
     ],
     "id": 1
 }
@@ -86,7 +86,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 
 ## 4. 执行资产转账
 
-方法: `transfer(to : string, symbol_or_id : string, amount : number, memo : string)`
+方法: `transfer(to : string, symbol_or_id : string, amount : string, memo : string)`
 
 **示例代码**
 
@@ -96,7 +96,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 	"jsonrpc": "2.0",
 	"id": 1,
 	"method": "transfer",
-	"params": ["bts", "TEST", 1, "hello"]
+	"params": ["bts", "TEST", "1", "hello"]
 }
 
 // 返回结果

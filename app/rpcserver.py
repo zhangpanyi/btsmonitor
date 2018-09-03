@@ -26,7 +26,7 @@ async def get_balances(context):
         result.append({
             'id': asset_info['id'],
             'symbol': asset_info['symbol'],
-            'amount': float(asset['amount'])/float(10**int(asset_info['precision']))
+            'amount': str(float(asset['amount'])/float(10**int(asset_info['precision'])))
         })
     return result
 
@@ -39,7 +39,7 @@ async def transfer(to, symbol_or_id, amount, memo, context):
     account = await server.account_info(client)
     asset = await server.get_asset_info(client, symbol_or_id)
     transfer = Transfer(client, account)
-    return await transfer.send_to(to, asset, amount, memo)
+    return await transfer.send_to(to, asset, float(amount), memo)
 
 @methods.add
 async def get_transfer_fees(symbols_or_ids : list, context):
@@ -112,7 +112,7 @@ class RpcServer(object):
 
             total = (float(base['amount'])*(fee['fee']+fee['price_per_kbyte']))/float(quote['amount'])
             total = total*scale/1e4/10**precision
-            fee_list.append(round(total, 2))
+            fee_list.append(str(round(total, 2)))
         return fee_list
 
     async def _handle(self, request):

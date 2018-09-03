@@ -86,7 +86,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 
 ## 4. 执行资产转账
 
-方法: `transfer(to : string, symbol_or_id : string, amount : number, memo : string)`
+方法: `transfer(to : string, symbol_or_id : string, amount : string, memo : string)`
 
 **示例代码**
 

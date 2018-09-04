@@ -88,7 +88,7 @@ class Monitor(object):
         # 获取交易ID
         trx_in_block = operation['trx_in_block']
         transaction = block_info['transactions'][trx_in_block]
-        trx['id'] = await self._get_transaction_id(transaction)
+        trx['txid'] = await self._get_transaction_id(transaction)
         
         # 获取转账金额
         asset = await self._get_asset_info(client, op['amount']['asset_id'])

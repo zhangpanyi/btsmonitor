@@ -49,9 +49,9 @@ class Transfer(object):
         txbuffer = Builder(self.client)
         txbuffer.append_ops(op)
         await txbuffer.append_signer(self.account, SysConfig().active_key, prefix, 'active')
-        await txbuffer.sign(asset['id'], expiration=600)
-        res = await txbuffer.broadcast()
-        return res.json()
+        signedtx = await txbuffer.sign(asset['id'], expiration=600)
+        await txbuffer.broadcast()
+        return signedtx.id
 
     async def _encrypt_memo(self, to, memo):
         ''' 加密备注信息

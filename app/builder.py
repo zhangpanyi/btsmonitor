@@ -73,6 +73,7 @@ class Builder(dict):
         await self._construct_tx(fee_asset_id, expiration)
         operations.default_prefix = self.client.chain_params['prefix']
 
+        signedtx = None
         try:
             signedtx = Signed_Transaction(**self.json())
         except:
@@ -83,6 +84,7 @@ class Builder(dict):
 
         signedtx.sign(self.wifs, chain=self.client.chain_params)
         self['signatures'].extend(signedtx.json().get('signatures'))
+        return signedtx
 
     async def broadcast(self):
         ''' 广播操作

@@ -1,12 +1,15 @@
 # -*- coding:utf-8 -*-
 
 import asyncio
+import hashlib
 import logging
 from .pusher import Pusher
 from .asyncrpc import AsyncRPC
 from .sysconfig import SysConfig
+from binascii import hexlify
 from bitsharesbase import memo as BtsMemo
 from bitsharesbase.account import PublicKey, PrivateKey
+from bitsharesbase.signedtransactions import Signed_Transaction
 
 def get_operation_id(id):
     ''' 获取操作id
@@ -56,6 +59,16 @@ class Monitor(object):
             self.asset_info[asset['symbol']] = asset
         return self.asset_info[asset_id]
 
+    async def _get_transaction_id(self, transaction):
+        ''' 获取交易ID
+        '''
+        try:
+            tx = Signed_Transaction(**transaction)
+            return tx.id
+        except Exception as e:
+            logging.warn('Failed to get transaction id, %s', str(e))
+            return None
+
     async def _process_transfer_operations(self, client, operation):
         ''' 处理转账操作
         '''
@@ -66,12 +79,16 @@ class Monitor(object):
         # 操作基本信息
         trx = {}
         op = operation['op'][1]
-        trx['txid'] = operation['id']
         
         # 获取区块信息
         trx['heigth'] = operation['block_num']  
         block_info = await client.get_block(trx['heigth'])
         trx['timestamp'] = block_info['timestamp']
+
+        # 获取交易ID
+        trx_in_block = operation['trx_in_block']
+        transaction = block_info['transactions'][trx_in_block]
+        trx['id'] = await self._get_transaction_id(transaction)
         
         # 获取转账金额
         asset = await self._get_asset_info(client, op['amount']['asset_id'])

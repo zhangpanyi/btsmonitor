@@ -102,40 +102,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 // 返回结果
 {
     "jsonrpc": "2.0",
-    "result": {
-        "ref_block_num": 17293,
-        "ref_block_prefix": 1715805526,
-        "expiration": "2018-06-29T03:22:56",
-        "operations": [
-            [
-                0,
-                {
-                    "fee": {
-                        "amount": 100,
-                        "asset_id": "1.3.0"
-                    },
-                    "from": "1.2.23006",
-                    "to": "1.2.3622",
-                    "amount": {
-                        "amount": 100000,
-                        "asset_id": "1.3.0"
-                    },
-                    "memo": {
-                        "from": "TEST62mtjuvvnur3e6HNKMPhFNtZeLD3Jm6zHWkoQpF5Ffmba3PKZG",
-                        "to": "TEST5xm8q3tAxS3KgPnao7LLEexBVKkbAqE6GenmUv9XHBZVNT1QYZ",
-                        "nonce": 14844237453023642202,
-                        "message": "9e1f10b1402ac003a53e4392fced58a0",
-                        "prefix": "TEST"
-                    },
-                    "extensions": []
-                }
-            ]
-        ],
-        "extensions": [],
-        "signatures": [
-            "200392d64d3bb9b8bd1234ad91ab7f82dba9357ffaed49fd59c089f9fe0bb6dda156631dd468de38131ffbd498dfb4b3bf20d537776b17310309db5ab8e1f206a8"
-        ]
-    },
+    "result": "45f8cbbb8cd56c0e9b807f8c2d6c652084502a85",
     "id": 1
 }
 ```

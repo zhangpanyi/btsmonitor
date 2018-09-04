@@ -3,6 +3,7 @@
 import json
 import asyncio
 import websockets
+from bitsharesbase import operations
 from bitsharesbase.chains import known_chains
 
 class RPCError(Exception):
@@ -47,6 +48,7 @@ class AsyncRPC(object):
         for k, v in known_chains.items():
             if v['chain_id'] == chain_id:
                 self.chain_params = v
+                operations.default_prefix = self.chain_params['prefix']
                 break
         if self.chain_params == None:
             raise('Connecting to unknown network!')

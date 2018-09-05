@@ -30,7 +30,30 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 
 # JSON-RPC 接口
 
-## 1. 获取资产余额
+## 1. 获取账户
+
+方法: `account`
+
+**示例代码**
+
+```
+// 请求示例
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "account",
+    "params": []
+}
+
+// 返回结果
+{
+    "jsonrpc": "2.0",
+    "result": "test-bts2018",
+    "id": 1
+}
+```
+
+## 2. 获取资产余额
 
 方法: `get_balances`
 
@@ -59,7 +82,7 @@ sudo docker run --name btsmonitor -d -p 18080:18080 btsmonitor
 }
 ```
 
-## 2. 获取转账手续费
+## 3. 获取转账手续费
 
 方法: `get_transfer_fees(symbols_or_ids : list)`
 
